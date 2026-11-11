@@ -427,6 +427,7 @@ body.reduce-motion .rcorner.ask { animation: none; }
 .sheet.slim .controls .btn { min-height: 52px !important; font-size: 17px !important; }
 .sheet.slim .chips { margin-top: 8px !important; }
 .sheethint { margin: 0 0 4px; font-size: 15px; color: var(--muted); }
+body.learnerview, body.learnerview * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 
 </style>
 </head>
@@ -1032,7 +1033,7 @@ window.ATI18N = {
     giveToken: 'Give token', holdUndo: 'Hold to undo', undone: 'Last token undone', nothingUndo: 'Nothing to undo on this board',
     didIt_young: 'You did it!', didIt_older: 'Goal reached', weDidIt: 'We did it!',
     isReady: '{item} is ready.', chooseReward: 'Choose what you want.', enjoy: 'Enjoy {item}!',
-    confirmGiven: 'Confirm {item} was given', needChoice: 'Choose a reinforcer to continue', startTimer: 'Start timer · {m} min', newBoard: 'Start new board',
+    confirmGiven: 'Confirm {item} was given', needChoice: 'Choose a reinforcer to continue', startTimer: 'Start {m} min timer', newBoard: 'Start new board',
     learnerView: 'Learner view', groupDisplay: 'Group display', clearBoard: 'Clear board…',
     clearBoardQ: 'Clear this board without an exchange?',
     clearBoardBody: 'Earned tokens on this board are cleared and logged as a staff correction. Use this only to fix a setup mistake — never as a consequence for behavior.',
@@ -1068,9 +1069,9 @@ window.ATI18N = {
     startBoard: 'Start a board', startLede: 'Pick who, the board, how many tokens and the reward. The board opens full screen.',
     stWho: 'Who is it for?', stBoard: 'Which board?', stTokens: 'How many tokens?', stReward: 'Working for…',
     stNoReward: 'They choose when the board is full', stOffer: 'Also let them keep it or switch when the board is full',
-    stMore: 'Add from the picture library', stOwn: 'Make your own (photo or name)', stGo: 'Start full screen',
+    stMore: '＋ New reinforcer from the pictures', stOwn: 'New reinforcer with a photo or name', stGo: 'Start full screen',
     stNeedWho: 'Pick a learner first.', stClearQ: 'Start a new board for {name}?', stClearBody: '{name} has {e} of {t} tokens on the current board. Starting clears it (it is saved in History).',
-    stStart: 'Start', holdBoardHint: 'Give a token: press and hold the picture.', holdBoardAria: 'Press and hold to give a token', stNewName: 'New learner name', stAddLearner: 'Add learner', timingBoth: 'Before, and again at the end', timingBothD: 'Picks first, and can keep it or switch when the board is full.',
+    stStart: 'Start', morePictures: 'More pictures', giveAndTimer: 'Give {item} · start {m} min timer', holdBoardHint: 'Give a token: press and hold the picture.', holdBoardAria: 'Press and hold to give a token', stNewName: 'New learner name', stAddLearner: 'Add learner', timingBoth: 'Before, and again at the end', timingBothD: 'Picks first, and can keep it or switch when the board is full.',
     keepOrSwitch: 'You did it! Keep {item} or pick something else?', keepIt: 'Keep {item}',
     libLabel: 'Picture library', libHint: 'Tap a picture, then type the name you use with this child.', noPicture: 'No picture', avatarHint: 'Shows the first letter of the name, or add a photo.', stLibHint: 'Tap a picture. Next you can type the name you use, then it is added to this learner.',
     cat_play: 'Play', cat_sensory: 'Sensory', cat_creative: 'Creative', cat_movement: 'Movement', cat_social: 'Social', cat_group: 'Group', cat_other: 'Other',
@@ -1127,7 +1128,7 @@ window.ATI18N = {
     giveToken: 'Token geben', holdUndo: 'Halten = rückgängig', undone: 'Letzter Token zurückgenommen', nothingUndo: 'Auf diesem Plan gibt es nichts rückgängig zu machen',
     didIt_young: 'Geschafft!', didIt_older: 'Ziel erreicht', weDidIt: 'Wir haben es geschafft!',
     isReady: '{item} ist bereit.', chooseReward: 'Such dir etwas aus.', enjoy: 'Viel Spaß: {item}!',
-    confirmGiven: 'Bestätigen: {item} gegeben', needChoice: 'Zum Weitermachen einen Verstärker wählen', startTimer: 'Timer starten · {m} Min.', newBoard: 'Neuen Plan starten',
+    confirmGiven: 'Bestätigen: {item} gegeben', needChoice: 'Zum Weitermachen einen Verstärker wählen', startTimer: '{m}-Min.-Timer starten', newBoard: 'Neuen Plan starten',
     learnerView: 'Ansicht für Lernende', groupDisplay: 'Gruppenanzeige', clearBoard: 'Plan leeren…',
     clearBoardQ: 'Diesen Plan ohne Tausch leeren?',
     clearBoardBody: 'Die gesammelten Token werden gelöscht und als Korrektur durch das Personal protokolliert. Nur zum Beheben eines Einrichtungsfehlers – nie als Konsequenz für Verhalten.',
@@ -1163,9 +1164,9 @@ window.ATI18N = {
     startBoard: 'Plan starten', startLede: 'Wähle wer, welcher Plan, wie viele Token und die Belohnung. Der Plan öffnet im Vollbild.',
     stWho: 'Für wen?', stBoard: 'Welcher Plan?', stTokens: 'Wie viele Token?', stReward: 'Ich arbeite für…',
     stNoReward: 'Wählt, wenn der Plan voll ist', stOffer: 'Am Ende auch behalten oder wechseln lassen',
-    stMore: 'Aus der Bildbibliothek hinzufügen', stOwn: 'Eigene erstellen (Foto oder Name)', stGo: 'Im Vollbild starten',
+    stMore: '＋ Neuer Verstärker aus den Bildern', stOwn: 'Neuer Verstärker mit Foto oder Name', stGo: 'Im Vollbild starten',
     stNeedWho: 'Wähle zuerst eine Person.', stClearQ: 'Neuen Plan für {name} starten?', stClearBody: '{name} hat {e} von {t} Token auf dem aktuellen Plan. Beim Starten wird er geleert (im Verlauf gespeichert).',
-    stStart: 'Starten', holdBoardHint: 'Token geben: Bild gedrückt halten.', holdBoardAria: 'Gedrückt halten, um einen Token zu geben', stNewName: 'Name der neuen Person', stAddLearner: 'Person hinzufügen', timingBoth: 'Vorher und noch einmal am Ende', timingBothD: 'Wählt zuerst und kann am Ende behalten oder wechseln.',
+    stStart: 'Starten', morePictures: 'Weitere Bilder', giveAndTimer: '{item} geben · {m}-Min.-Timer starten', holdBoardHint: 'Token geben: Bild gedrückt halten.', holdBoardAria: 'Gedrückt halten, um einen Token zu geben', stNewName: 'Name der neuen Person', stAddLearner: 'Person hinzufügen', timingBoth: 'Vorher und noch einmal am Ende', timingBothD: 'Wählt zuerst und kann am Ende behalten oder wechseln.',
     keepOrSwitch: 'Geschafft! {item} behalten oder etwas anderes wählen?', keepIt: '{item} behalten',
     libLabel: 'Bildbibliothek', libHint: 'Tippe auf ein Bild und gib dann den Namen ein, den ihr mit dem Kind verwendet.', noPicture: 'Kein Bild', avatarHint: 'Zeigt den ersten Buchstaben des Namens, oder füge ein Foto hinzu.', stLibHint: 'Tippe auf ein Bild. Danach kannst du den Namen eingeben; es wird dieser Person hinzugefügt.',
     cat_play: 'Spiel', cat_sensory: 'Sinne', cat_creative: 'Kreativ', cat_movement: 'Bewegung', cat_social: 'Sozial', cat_group: 'Gruppe', cat_other: 'Sonstiges',
@@ -1959,7 +1960,16 @@ window.ATI18N = {
   };
 
   function safe(fn) { if (!enabled) return; try { fn(); } catch (e) { /* audio unavailable */ } }
+  /* iPad only lets sound start during a tap. A press-and-hold awards the token after the finger has been
+     down for a moment, so the audio is woken up (with a silent blip) as soon as the finger touches the screen. */
+  function unlock() {
+    try {
+      var a = ac(), b = a.createBuffer(1, 1, 22050), src = a.createBufferSource();
+      src.buffer = b; src.connect(a.destination); src.start(0);
+    } catch (e) { /* audio unavailable */ }
+  }
   var api = {
+    unlock: unlock,
     themes: THEME,
     setEnabled: function (v) { enabled = !!v; },
     token: function (themeId, index) { safe(function () { var t = themeId && THEME[themeId]; if (t) t.token(index || 0); else chime(0); }); },
@@ -2353,14 +2363,22 @@ window.ATI18N = {
       if (info.r.kind !== 'shared' && !opts.noAward) h += '<button class="award" data-a="award" ' + scopeAttrs(sc) + '><span class="plus" aria-hidden="true">＋</span>' + esc(t('giveToken')) + '</button>';
       h += holdBtn('undo', t('holdUndo'), scopeAttrs(sc));
     } else if (b.status === 'complete') {
-      if (info.sel) h += '<button class="btn go" style="min-height:72px;font-size:20px" data-a="deliver" ' + scopeAttrs(sc) + '>✓ ' + esc(t('confirmGiven', { item: tx(info.sel.label) })) + '</button>';
+      if (info.sel) h += deliverBtn(sc, info, 'min-height:72px;font-size:20px') + newBoardBtn(sc, 'min-height:72px;font-size:20px');
       else h += '<button class="btn primary" style="min-height:72px" data-a="openChoice" ' + scopeAttrs(sc) + '>' + esc(t('needChoice')) + '</button>';
       h += holdBtn('undo', t('holdUndo'), scopeAttrs(sc));
     } else if (b.status === 'delivered') {
-      if (info.sel && info.sel.duration) h += '<button class="btn blue" data-a="timer" ' + scopeAttrs(sc) + '>⏱ ' + esc(t('startTimer', { m: info.sel.duration })) + '</button>';
-      h += '<button class="btn primary" style="min-height:72px;font-size:20px" data-a="newBoard" ' + scopeAttrs(sc) + '>↻ ' + esc(t('newBoard')) + '</button>';
+      if (info.sel && info.sel.duration) h += '<button class="btn blue" data-a="timer" ' + scopeAttrs(sc) + '>' + esc(t('startTimer', { m: info.sel.duration })) + '</button>';
+      h += newBoardBtn(sc, 'min-height:72px;font-size:20px');
     }
     return h + '</div>';
+  }
+  /* Board full: no separate "confirm it was given" step. Starting the timer or starting a new board records the reward as given. */
+  function deliverBtn(sc, info, style) {
+    var d = info.sel.duration;
+    return d ? '<button class="btn go" style="' + style + '" data-a="deliver" ' + scopeAttrs(sc) + '>' + esc(t('startTimer', { m: d })) + '</button>' : '';
+  }
+  function newBoardBtn(sc, style) {
+    return '<button class="btn primary" style="' + style + '" data-a="newBoard" ' + scopeAttrs(sc) + '>↻ ' + esc(t('newBoard')) + '</button>';
   }
   function goalBlock(info) {
     var r = info.r;
@@ -2463,7 +2481,7 @@ window.ATI18N = {
       var act = '';
       if (mode === 'staff') {
         if (p.status === 'earning') act = '<button class="award" data-a="award" ' + scopeAttrs(sc) + '><span class="plus" aria-hidden="true">＋</span>' + esc(t('giveToken')) + '</button>';
-        else if (p.status === 'complete') act = info.sel ? '<button class="btn go" data-a="deliver" ' + scopeAttrs(sc) + '>✓ ' + esc(t('confirmGiven', { item: tx(info.sel.label) })) + '</button>' : '<button class="btn primary" data-a="openChoice" ' + scopeAttrs(sc) + '>' + esc(t('needChoice')) + '</button>';
+        else if (p.status === 'complete') act = info.sel ? deliverBtn(sc, info, '') + newBoardBtn(sc, '') : '<button class="btn primary" data-a="openChoice" ' + scopeAttrs(sc) + '>' + esc(t('needChoice')) + '</button>';
         else act = '<button class="btn primary" data-a="newBoard" ' + scopeAttrs(sc) + '>↻ ' + esc(t('newBoard')) + '</button>';
         act += '<div class="row">' + holdBtn('undo', t('holdUndo'), scopeAttrs(sc), 'small') + '<button class="btn small" data-a="openBoard" data-id="' + esc(l.id) + '" data-from="' + esc(g.id) + '">' + esc(t('openBoard')) + '</button><button class="btn small" data-a="lv" ' + scopeAttrs(sc) + ' data-from="' + esc(g.id) + '">⤢ ' + esc(t('fullScreen')) + '</button></div>';
       }
@@ -2581,6 +2599,11 @@ window.ATI18N = {
   }
   function stepHead(n, label) { return '<h2 class="stephead"><span class="stepnum">' + n + '</span>' + esc(label) + '</h2>'; }
   function libGrid(action, cur, withNone, set) {
+    if (set === 'rewards') {
+      var main = window.ATPics.rewards, ids = main.map(function (x) { return x.id; });
+      var more = window.ATPics.list.filter(function (x) { return ids.indexOf(x.id) === -1 && ids.indexOf(x.icon) === -1; });
+      return libGrid(action, cur, false, main) + '<p class="lab" style="margin:14px 0 0">' + esc(t('morePictures')) + '</p>' + libGrid(action, cur, false, more);
+    }
     var items = (set || window.ATPics.list).map(function (it) {
       var nm = lang() === 'de' ? it.de : it.en;
       return '<button type="button" class="libitem" data-a="' + action + '" data-p="' + it.id + '" aria-pressed="' + (cur === it.id) + '" aria-label="' + esc(nm) + '">' + pic(it.id, 'li') + '<span>' + esc(nm) + '</span></button>';
@@ -2617,7 +2640,7 @@ window.ATI18N = {
       '<button type="button" class="choice" data-a="startSet" data-f="rid" data-v="" aria-pressed="' + (!st.rid) + '">' + (!st.rid ? '<span class="tick">✓</span>' : '') + pic('gift', 'ci') + '<span class="cl" style="font-size:16px">' + esc(t('stNoReward')) + '</span></button></div>';
     if (st.rid) h += '<label class="check" style="margin-top:14px;max-width:560px"><input type="checkbox" data-start-offer="1"' + (st.offer ? ' checked' : '') + '>' + esc(t('stOffer')) + '</label>';
     h += '<div class="row" style="margin-top:14px"><button type="button" class="btn small" data-a="startLibToggle" aria-expanded="' + !!st.libOpen + '">' + (st.libOpen ? '▾ ' : '▸ ') + esc(t('stMore')) + '</button><button type="button" class="btn small" data-a="startOwn">＋ ' + esc(t('stOwn')) + '</button></div>';
-    if (st.libOpen) h += '<p class="hint" style="margin-top:10px">' + esc(t('stLibHint')) + '</p>' + libGrid('startLib', '', false, window.ATPics.rewards);
+    if (st.libOpen) h += '<p class="hint" style="margin-top:10px">' + esc(t('stLibHint')) + '</p>' + libGrid('startLib', '', false, 'rewards');
     h += '</section>';
     h += (ui.formErr ? '<p class="err" role="alert" style="text-align:left">' + esc(ui.formErr) + '</p>' : '') +
       '<div class="row"><button class="btn primary startgo" data-a="startGo">⤢ ' + esc(t('stGo')) + '</button><button class="btn" data-a="nav" data-to="home">' + esc(t('cancel')) + '</button></div></div>';
@@ -2763,7 +2786,7 @@ window.ATI18N = {
     var d = ui.draft;
     return '<div class="row"><button class="btn small" data-a="nav" data-to="' + (ui.afterR ? 'start' : 'reinforcers') + '">' + esc(t('back')) + '</button><h1>' + esc(d._new ? t('newReinforcer') : t('editReinforcer')) + '</h1></div><div class="form" style="margin-top:14px">' +
       '<div class="field"><label for="r-l">' + esc(t('label')) + '</label><input id="r-l" type="text" maxlength="40" data-f="rlabel" value="' + esc(d._label) + '"></div>' +
-      '<div class="field"><span class="lab">' + esc(t('picture')) + '</span><div class="rprev">' + (d.image ? '<img alt="" src="' + d.image + '">' : window.ATPics.svg(d.pic || 'bubbles')) + '</div><p class="hint">' + esc(t('libHint')) + '</p>' + libGrid('rLib', d.image ? '' : d.pic, false, window.ATPics.rewards) + upload('image', d.image) + '</div>' +
+      '<div class="field"><span class="lab">' + esc(t('picture')) + '</span><div class="rprev">' + (d.image ? '<img alt="" src="' + d.image + '">' : window.ATPics.svg(d.pic || 'bubbles')) + '</div><p class="hint">' + esc(t('libHint')) + '</p>' + libGrid('rLib', d.image ? '' : d.pic, false, 'rewards') + upload('image', d.image) + '</div>' +
       '<div class="field"><label for="r-c">' + esc(t('category')) + '</label><select id="r-c" data-f="category">' + C.CATEGORIES.map(function (c) { return '<option value="' + c + '"' + (d.category === c ? ' selected' : '') + '>' + esc(t('cat_' + c)) + '</option>'; }).join('') + '</select></div>' +
       '<div class="field"><label for="r-d">' + esc(t('duration')) + '</label><input id="r-d" type="number" min="0" max="120" inputmode="numeric" data-f="duration" value="' + esc(d.duration || '') + '" style="max-width:160px"><p class="hint">' + esc(t('durationHint')) + '</p></div>' +
       '<label class="check" style="max-width:420px"><input type="checkbox" data-check="group"' + (d.group ? ' checked' : '') + '>' + esc(t('groupR')) + '</label>' +
@@ -3080,9 +3103,11 @@ window.ATI18N = {
       var res = C.confirmDelivery(S, sc);
       if (!res.ok) { render(); return; }
       save(); render(); touchSheet();
+      if (res.reinforcer && res.reinforcer.duration) A.timer(el);
     },
     newBoard: function (el) {
-      var sc = scopeFrom(el);
+      var sc = scopeFrom(el), info = boardInfo(sc);
+      if (info && info.p.status === 'complete' && info.sel) C.confirmDelivery(S, sc); // reward counts as given
       if (C.startNewBoard(S, sc).ok) { save(); render(); touchSheet(); }
     },
     timer: function (el) {
@@ -3380,6 +3405,13 @@ window.ATI18N = {
   });
   var holdT = null, holdEl = null;
   function endHold() { clearTimeout(holdT); holdT = null; if (holdEl) holdEl.classList.remove('holding'); holdEl = null; }
+  /* Wake up audio on every touch so sounds still play when a token comes from press-and-hold. */
+  ['pointerdown', 'touchstart', 'touchend', 'click'].forEach(function (n) {
+    document.addEventListener(n, function () { if (S && S.settings.sound) { if (window.ATSounds) window.ATSounds.unlock(); try { ac(); } catch (e) { /* no audio */ } } }, { passive: true, capture: true });
+  });
+  /* Stop the iPad's long-press text selection and callout on the full-screen board. */
+  document.addEventListener('touchstart', function (ev) { if (ev.target.closest && ev.target.closest('.lvhold')) ev.preventDefault(); }, { passive: false });
+  document.addEventListener('selectstart', function (ev) { if (ui.route.name === 'lv') ev.preventDefault(); });
   document.addEventListener('pointerdown', function (ev) {
     var el = ev.target.closest('[data-hold]');
     if (!el || el.disabled) return;
