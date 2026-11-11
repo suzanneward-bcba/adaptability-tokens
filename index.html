@@ -414,6 +414,20 @@ body.reduce-motion .rcorner.ask { animation: none; }
 .well.dot.on { background: var(--magenta); border-color: var(--magenta); box-shadow: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pic svg, :root:not([data-theme="light"]) .themebox svg { filter: none; } }
 
+/* ---------- give tokens by pressing and holding the board ---------- */
+.lvhold { width: 100%; display: flex; flex-direction: column; align-items: center; cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: none; -webkit-tap-highlight-color: transparent; border-radius: 26px; }
+.lvhold * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; }
+.lvhold:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.lvhold .themebox { transition: transform .15s ease-out; }
+.lvhold.holding .themebox { transform: scale(.97); transition: transform var(--hold-ms, 500ms) ease-out; }
+.gcard .lvhold .themebox { width: 100%; }
+.sheet.slim { left: auto; right: max(12px, env(safe-area-inset-right, 0px)); transform: none; bottom: calc(66px + env(safe-area-inset-bottom, 0px)); width: min(340px, calc(100% - 24px)); padding: 12px 14px; }
+.sheet.slim h3 { font-size: 16px; margin: 0 0 6px; gap: 8px; }
+.sheet.slim .controls { flex-direction: column; align-items: stretch; margin-top: 8px; }
+.sheet.slim .controls .btn { min-height: 52px !important; font-size: 17px !important; }
+.sheet.slim .chips { margin-top: 8px !important; }
+.sheethint { margin: 0 0 4px; font-size: 15px; color: var(--muted); }
+
 </style>
 </head>
 <body>
@@ -1056,7 +1070,7 @@ window.ATI18N = {
     stNoReward: 'They choose when the board is full', stOffer: 'Also let them keep it or switch when the board is full',
     stMore: 'Add from the picture library', stOwn: 'Make your own (photo or name)', stGo: 'Start full screen',
     stNeedWho: 'Pick a learner first.', stClearQ: 'Start a new board for {name}?', stClearBody: '{name} has {e} of {t} tokens on the current board. Starting clears it (it is saved in History).',
-    stStart: 'Start', stNewName: 'New learner name', stAddLearner: 'Add learner', timingBoth: 'Before, and again at the end', timingBothD: 'Picks first, and can keep it or switch when the board is full.',
+    stStart: 'Start', holdBoardHint: 'Give a token: press and hold the picture.', holdBoardAria: 'Press and hold to give a token', stNewName: 'New learner name', stAddLearner: 'Add learner', timingBoth: 'Before, and again at the end', timingBothD: 'Picks first, and can keep it or switch when the board is full.',
     keepOrSwitch: 'You did it! Keep {item} or pick something else?', keepIt: 'Keep {item}',
     libLabel: 'Picture library', libHint: 'Tap a picture, then type the name you use with this child.', noPicture: 'No picture', avatarHint: 'Shows the first letter of the name, or add a photo.', stLibHint: 'Tap a picture. Next you can type the name you use, then it is added to this learner.',
     cat_play: 'Play', cat_sensory: 'Sensory', cat_creative: 'Creative', cat_movement: 'Movement', cat_social: 'Social', cat_group: 'Group', cat_other: 'Other',
@@ -1151,7 +1165,7 @@ window.ATI18N = {
     stNoReward: 'Wählt, wenn der Plan voll ist', stOffer: 'Am Ende auch behalten oder wechseln lassen',
     stMore: 'Aus der Bildbibliothek hinzufügen', stOwn: 'Eigene erstellen (Foto oder Name)', stGo: 'Im Vollbild starten',
     stNeedWho: 'Wähle zuerst eine Person.', stClearQ: 'Neuen Plan für {name} starten?', stClearBody: '{name} hat {e} von {t} Token auf dem aktuellen Plan. Beim Starten wird er geleert (im Verlauf gespeichert).',
-    stStart: 'Starten', stNewName: 'Name der neuen Person', stAddLearner: 'Person hinzufügen', timingBoth: 'Vorher und noch einmal am Ende', timingBothD: 'Wählt zuerst und kann am Ende behalten oder wechseln.',
+    stStart: 'Starten', holdBoardHint: 'Token geben: Bild gedrückt halten.', holdBoardAria: 'Gedrückt halten, um einen Token zu geben', stNewName: 'Name der neuen Person', stAddLearner: 'Person hinzufügen', timingBoth: 'Vorher und noch einmal am Ende', timingBothD: 'Wählt zuerst und kann am Ende behalten oder wechseln.',
     keepOrSwitch: 'Geschafft! {item} behalten oder etwas anderes wählen?', keepIt: '{item} behalten',
     libLabel: 'Bildbibliothek', libHint: 'Tippe auf ein Bild und gib dann den Namen ein, den ihr mit dem Kind verwendet.', noPicture: 'Kein Bild', avatarHint: 'Zeigt den ersten Buchstaben des Namens, oder füge ein Foto hinzu.', stLibHint: 'Tippe auf ein Bild. Danach kannst du den Namen eingeben; es wird dieser Person hinzugefügt.',
     cat_play: 'Spiel', cat_sensory: 'Sinne', cat_creative: 'Kreativ', cat_movement: 'Bewegung', cat_social: 'Sozial', cat_group: 'Gruppe', cat_other: 'Sonstiges',
@@ -2336,7 +2350,7 @@ window.ATI18N = {
     opts = opts || {};
     var b = info.r.board, h = '<div class="controls">';
     if (b.status === 'earning') {
-      if (info.r.kind !== 'shared') h += '<button class="award" data-a="award" ' + scopeAttrs(sc) + '><span class="plus" aria-hidden="true">＋</span>' + esc(t('giveToken')) + '</button>';
+      if (info.r.kind !== 'shared' && !opts.noAward) h += '<button class="award" data-a="award" ' + scopeAttrs(sc) + '><span class="plus" aria-hidden="true">＋</span>' + esc(t('giveToken')) + '</button>';
       h += holdBtn('undo', t('holdUndo'), scopeAttrs(sc));
     } else if (b.status === 'complete') {
       if (info.sel) h += '<button class="btn go" style="min-height:72px;font-size:20px" data-a="deliver" ' + scopeAttrs(sc) + '>✓ ' + esc(t('confirmGiven', { item: tx(info.sel.label) })) + '</button>';
@@ -2455,7 +2469,7 @@ window.ATI18N = {
       }
       var wf = info.sel ? rTag(info.sel) : '';
       return '<div class="gcard"><div class="row">' + avatar(l) + '<div><div class="t" style="font-weight:700;font-size:20px">' + esc(l.name) + '</div><div class="s" style="color:var(--muted);font-size:15px">' + esc(tx(l.goal.text)) + '</div></div></div>' +
-        themeSvg(themeOf(l), p.earned, p.target, { newIdx: newIndex, small: true, animateDone: !!(ui.fx && ui.fx.key === k && ui.fx.completed) }) + '<div class="row">' + statusTag(p) + wf + '</div>' + act + '</div>';
+        (function (vis) { return mode !== 'staff' && p.status === 'earning' ? holdWrap(sc, vis) : vis; })(themeSvg(themeOf(l), p.earned, p.target, { newIdx: newIndex, small: true, animateDone: !!(ui.fx && ui.fx.key === k && ui.fx.completed) })) + '<div class="row">' + statusTag(p) + wf + '</div>' + act + '</div>';
     }).join('') + '</div>';
   }
   function sharedStaff(g) {
@@ -2502,6 +2516,10 @@ window.ATI18N = {
     if (info.timing === 'after' && b.status === 'earning') return '<div class="rcorner wait"><span class="rl">' + esc(label) + '</span>' + pic('gift', 'rc-ic') + '<span class="rn">' + esc(t('chooseLater')) + '</span></div>';
     return '<button class="rcorner ask" data-a="openChoice" ' + scopeAttrs(sc) + '><span class="rl">' + esc(label) + '</span>' + pic('ask', 'rc-ic') + '<span class="rn">' + esc(t('chooseWork')) + '</span></button>';
   }
+  /* Adults press and hold the picture (about half a second) to give a token; quick taps do nothing. */
+  function holdWrap(sc, html) {
+    return '<div class="lvhold" data-hold="lvaward" data-ms="500" ' + scopeAttrs(sc) + ' role="button" tabindex="0" aria-label="' + esc(t('holdBoardAria')) + '">' + html + '</div>';
+  }
   function lvBoard(sc) {
     var info = boardInfo(sc);
     if (!info) return '';
@@ -2513,6 +2531,7 @@ window.ATI18N = {
       who = '<span class="avatar lg grp" aria-hidden="true">' + window.ATPics.svg(r.kind === 'team' ? 'group' : 'goal') + '</span><span><span class="nm">' + esc(tx(r.group.name)) + '</span><span class="lvgoal">' + esc(r.kind === 'team' ? t('teamBoard') : t('sharedGoal')) + '</span></span>';
     }
     var stage = trayBlock(sc, info, 'learner');
+    if (b.status === 'earning' && r.kind !== 'shared') stage = holdWrap(sc, stage);
     stage += statePanel(sc, info, 'learner');
     if (r.kind === 'team') stage += teamNoticed(r.group, 'learner');
     return '<div class="lvtop"><div class="lvwho">' + who + '</div>' + rewardCorner(sc, info) + '</div><div class="lvstage' + (b.status !== 'earning' ? ' done' : '') + '">' + stage + '</div>';
@@ -2526,14 +2545,14 @@ window.ATI18N = {
     if (fn && (document.fullscreenElement || document.webkitFullscreenElement)) { try { var p = fn.call(document); if (p && p.catch) p.catch(function () {}); } catch (e) { /* ignore */ } }
   }
   function staffSheet(sc) {
-    var h = '<div class="sheet" role="dialog" aria-label="' + esc(t('staffControls')) + '"><h3>' + esc(t('staffControls')) + '<button class="btn small" data-a="exitLV">' + esc(t('exitLV')) + '</button></h3>';
+    var h = '<div class="sheet' + (sc.type === 'learner' || sc.type === 'team' ? ' slim' : '') + '" role="dialog" aria-label="' + esc(t('staffControls')) + '"><h3>' + esc(t('staffControls')) + '<button class="btn small" data-a="exitLV">' + esc(t('exitLV')) + '</button></h3>';
     if (sc.type === 'indiv') {
       var g = C.findGroup(S, sc.groupId);
-      h += '<div class="list">' + g.memberIds.map(function (id) {
+      h += '<p class="sheethint">' + esc(t('holdBoardHint')) + '</p><div class="list">' + g.memberIds.map(function (id) {
         var l = C.findLearner(S, id);
         if (!l) return '';
         var lsc = { type: 'learner', id: id }, info = boardInfo(lsc);
-        return '<div class="item"><span class="grow t">' + esc(l.name) + ' · ' + esc(t('ofN', { e: Math.min(info.p.earned, info.p.target), t: info.p.target })) + '</span>' + staffControls(lsc, info).replace('class="controls"', 'class="controls" style="margin:0"') + '</div>';
+        return '<div class="item"><span class="grow t">' + esc(l.name) + ' · ' + esc(t('ofN', { e: Math.min(info.p.earned, info.p.target), t: info.p.target })) + '</span>' + staffControls(lsc, info, { noAward: true }).replace('class="controls"', 'class="controls" style="margin:0"') + '</div>';
       }).join('') + '</div>';
     } else if (sc.type === 'shared') {
       var gg = C.findGroup(S, sc.groupId), info2 = boardInfo(sc);
@@ -2548,8 +2567,9 @@ window.ATI18N = {
       h += staffControls(sc, info2);
     } else {
       var info = boardInfo(sc);
+      if (info.r.board.status === 'earning') h += '<p class="sheethint">' + esc(t('holdBoardHint')) + '</p>';
       if (info.r.kind === 'team') h += teamChips(info.r.group);
-      h += staffControls(sc, info);
+      h += staffControls(sc, info, { noAward: true });
     }
     return h + '</div>';
   }
@@ -3119,6 +3139,7 @@ window.ATI18N = {
       var f = document.getElementById('qa-name'), name = ((f && f.value) || '').trim();
       if (!name) { if (f) f.focus(); return; }
       var d = newDraftLearner(null); d.name = name; delete d._new; delete d._goalText;
+      d.reinforcerIds = S.reinforcers.filter(function (r) { return r.available; }).map(function (r) { return r.id; });
       var clean = stripDraft(d); clean.goal.text = '';
       commit(function () { S.learners.push(clean); ui.start = startDefaults(clean); ui.formErr = ''; });
     },
@@ -3344,7 +3365,8 @@ window.ATI18N = {
       if (res.ok) { save(); render(); toast(t('undone')); } else toast(t('nothingUndo'));
       touchSheet();
     },
-    sheet: function () { ui.sheetOpen = !ui.sheetOpen; render(); touchSheet(); }
+    sheet: function () { ui.sheetOpen = !ui.sheetOpen; render(); touchSheet(); },
+    lvaward: function (el) { A.award(el); }
   };
 
   /* ---------------- events ---------------- */
