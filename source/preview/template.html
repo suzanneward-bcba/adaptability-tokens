@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>adaptABILITY Tokens — theme preview</title>
+<style>
+:root{--cream:#fbf6ec;--paper:#fffdf8;--line:#e3d8c3;--ink:#2f2a33;--muted:#6b6670;--magenta:#a12279;--mink:#fff;--blue:#2a60a6;--soft:#f7e4f0;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cream:#1f1c22;--paper:#2a262e;--line:#46404d;--ink:#f3eee4;--muted:#b9b2bd;--magenta:#d65aab;--mink:#1f1c22;--blue:#79a3e3;--soft:#43283b;color-scheme:dark}}
+:root[data-theme="dark"]{--cream:#1f1c22;--paper:#2a262e;--line:#46404d;--ink:#f3eee4;--muted:#b9b2bd;--magenta:#d65aab;--mink:#1f1c22;--blue:#79a3e3;--soft:#43283b;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%}body{margin:0;background:var(--cream);color:var(--ink);font-family:'Century Gothic',CenturyGothic,AppleGothic,'Avenir Next',Futura,'Segoe UI',sans-serif;font-size:17px;line-height:1.4}
+main{max-width:1160px;margin:0 auto;padding:20px 18px 50px}
+h1{font-size:28px;margin:0 0 4px}h2{font-size:19px;margin:26px 0 10px}
+.lede{color:var(--muted);margin:0 0 16px;max-width:72ch}
+.stages{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stage{background:var(--paper);border-radius:22px;padding:14px;box-shadow:0 6px 18px rgba(80,60,30,.08)}
+.stage h3{margin:0 0 8px;font-size:17px;display:flex;justify-content:space-between;gap:8px}
+.stage h3 span{font-weight:400;color:var(--muted);font-size:14px}
+.count{text-align:center;font-weight:700;font-size:22px;margin:8px 0 0}
+.finish{text-align:center;color:var(--muted);font-size:15px;min-height:1.4em;margin:2px 0 0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 0}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+.btn{border:0;border-radius:14px;padding:10px 16px;min-height:50px;font-weight:700;background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.primary{background:var(--magenta);color:var(--mink);box-shadow:none;min-width:170px;font-size:19px}
+.btn[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--magenta);background:var(--soft)}
+.seg{display:inline-flex;gap:6px;align-items:center}.seg>span{color:var(--muted);font-size:15px;margin-right:4px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.thumb{border:2px solid var(--line);background:var(--paper);border-radius:18px;padding:8px;text-align:center;font-weight:700;font-size:15px}
+.thumb[aria-pressed="true"]{border-color:var(--magenta);background:var(--soft)}
+.thumb small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+@media (max-width:700px){.stages{grid-template-columns:1fr}}
+/*THEMECSS*/
+</style></head>
+<body><main>
+<h1>Token themes — preview</h1>
+<p class="lede">Each token adds a piece. When the board is full, the picture transforms. Tap <b>Give token</b> or <b>Play demo</b> — switch <b>Sound</b> between theme-matched sounds and the standard chime + marimba — and watch the calm and big finishes side by side. These are drafts for review — not yet inside the app.</p>
+<div class="stages">
+  <div class="stage"><h3>Calm finish <span>about 2–3 seconds, then still</span></h3><div id="calm"></div><p class="count" id="c1"></p></div>
+  <div class="stage"><h3>Big finish <span>longer motion, confetti, sparkle</span></h3><div id="big"></div><p class="count" id="c2"></p></div>
+</div>
+<p class="finish" id="finish"></p>
+<div class="controls">
+  <button class="btn primary" id="give">＋ Give token</button>
+  <button class="btn" id="undo">↶ Undo</button>
+  <button class="btn" id="demo">▶ Play demo</button>
+  <button class="btn" id="replay">↻ Replay finish</button>
+  <button class="btn" id="reset">Reset</button>
+</div>
+<div class="controls">
+  <span class="seg"><span>Tokens</span><button class="btn" data-n="3">3</button><button class="btn" data-n="5">5</button><button class="btn" data-n="10">10</button></span>
+  <span class="seg"><span>Sound</span><button class="btn" data-snd="theme">Theme sounds</button><button class="btn" data-snd="standard">Chime + marimba</button><button class="btn" data-snd="off">Off</button></span>
+  <span class="seg"><span>Reduced motion</span><button class="btn" id="rm" aria-pressed="false">Off</button></span>
+</div>
+<div id="gal"></div>
+</main>
+<script>
+/*THEMES*/
+</script>
+<script>
+/*SOUNDS*/
+</script>
+<script>
+(function(){
+  var TH = window.ATThemes, SND = window.ATSounds, st = {id:'cookie', n:5, k:0, rm:false, newIdx:-1, snd:'theme'}, demoT = null;
+  function tokenSnd(i){ if (st.snd === 'off') return; SND.token(st.snd === 'theme' ? st.id : null, i); }
+  function finishSnd(){ if (st.snd === 'off') return; SND.finish(st.snd === 'theme' ? st.id : null); }
+  var $ = function(id){ return document.getElementById(id); };
+  function draw(){
+    $('calm').innerHTML = TH.render(st.id, st.n, st.k, {mode:'calm', reduced:st.rm, newIdx:st.newIdx});
+    $('big').innerHTML = TH.render(st.id, st.n, st.k, {mode:'big', reduced:st.rm, newIdx:st.newIdx});
+    var txt = st.k + ' of ' + st.n; $('c1').textContent = txt; $('c2').textContent = txt;
+    $('finish').textContent = 'Finish: ' + TH.themes[st.id].finish.en + '.' + (st.snd === 'theme' ? '  Sound: ' + SND.themes[st.id].en + '.' : st.snd === 'standard' ? '  Sound: chime per token, marimba at the end.' : '');
+    document.querySelectorAll('[data-snd]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.snd === st.snd)); });
+    document.querySelectorAll('[data-n]').forEach(function(b){ b.setAttribute('aria-pressed', String(+b.dataset.n === st.n)); });
+    document.querySelectorAll('.thumb').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.id === st.id)); });
+    $('rm').textContent = st.rm ? 'On' : 'Off'; $('rm').setAttribute('aria-pressed', String(st.rm));
+    $('give').disabled = st.k >= st.n; st.newIdx = -1;
+  }
+  function stopDemo(){ clearTimeout(demoT); demoT = null; }
+  function give(){ if (st.k >= st.n) return; st.newIdx = st.k; st.k++; draw(); if (st.k >= st.n) finishSnd(); else tokenSnd(st.k - 1); }
+  $('give').onclick = function(){ stopDemo(); give(); };
+  $('undo').onclick = function(){ stopDemo(); if (st.k > 0) { st.k--; draw(); } };
+  $('reset').onclick = function(){ stopDemo(); st.k = 0; draw(); };
+  $('replay').onclick = function(){ stopDemo(); st.k = st.n; draw(); finishSnd(); };
+  document.querySelectorAll('[data-snd]').forEach(function(b){ b.onclick = function(){ st.snd = b.dataset.snd; draw(); if (st.snd !== 'off') tokenSnd(0); }; });
+  $('rm').onclick = function(){ st.rm = !st.rm; draw(); };
+  $('demo').onclick = function(){ stopDemo(); st.k = 0; draw(); (function step(){ demoT = setTimeout(function(){ give(); if (st.k < st.n) step(); }, st.n > 5 ? 450 : 750); })(); };
+  document.querySelectorAll('[data-n]').forEach(function(b){ b.onclick = function(){ stopDemo(); st.n = +b.dataset.n; st.k = Math.min(st.k, st.n); draw(); }; });
+  var g = '';
+  TH.families.forEach(function(f){
+    g += '<h2>' + f.en + '</h2><div class="gallery">';
+    TH.order.filter(function(id){ return TH.themes[id].fam === f.id; }).forEach(function(id){
+      g += '<button class="thumb" data-id="' + id + '">' + TH.render(id, 5, 3, {reduced:true}) + TH.themes[id].en + '<small>' + TH.themes[id].finish.en + '</small></button>';
+    });
+    g += '</div>';
+  });
+  $('gal').innerHTML = g;
+  document.querySelectorAll('.thumb').forEach(function(b){ b.onclick = function(){ stopDemo(); st.id = b.dataset.id; st.k = 0; draw(); window.scrollTo({top:0, behavior: st.rm ? 'auto' : 'smooth'}); setTimeout(function(){ $('demo').click(); }, 350); }; });
+  draw();
+})();
+</script>
+</body></html>
