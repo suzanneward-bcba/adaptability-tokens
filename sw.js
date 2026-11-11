@@ -1,5 +1,3 @@
-
-Sw · JS
 /* adaptABILITY Tokens offline cache — version 0be9093da3 */
 const CACHE = 'at-0be9093da3';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png'];
